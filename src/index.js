@@ -1,7 +1,11 @@
-require('./main.css');
-var logoPath = require('./logo.svg');
-var Elm = require('./Main.elm');
+require('sanitize.css/sanitize.css')
+require('./main.css')
+require('materialize-css/dist/css/materialize.min.css')
 
-var root = document.getElementById('root');
+require('materialize-css/dist/js/materialize.min.js')
 
-Elm.Main.embed(root, logoPath);
+var Elm = require('./Main.elm')
+
+var root = document.getElementById('root')
+
+Elm.Main.embed(root)

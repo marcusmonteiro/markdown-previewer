@@ -1,7 +1,7 @@
 module App exposing (..)
 
-import Html exposing (Html, div, input, text)
-import Html.Attributes exposing (placeholder)
+import Html exposing (Html, a, div, footer,  h5, textarea, text)
+import Html.Attributes exposing (class, for, id, href, placeholder)
 import Html.Events exposing (onInput)
 import Markdown exposing (toHtml)
 
@@ -11,8 +11,8 @@ type alias Model =
     }
 
 
-init : String -> ( Model, Cmd Msg )
-init path =
+init : ( Model, Cmd Msg )
+init =
     ({content = ""}, Cmd.none)
 
 
@@ -29,9 +29,28 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ input [placeholder "", onInput Change] []
-        , div [] [toHtml [] model.content]
+    div [class "container"]
+        [ div [class "row"]
+            [ h5 []
+                [ a [href "https://github.com/marcusmonteiro/markdown-previewer"] [text "Markdown Previewer"]
+                , text " by "
+                , a [href "https://marcusmonteiro.github.io/"] [text "Marcus Monteiro"]
+                ]
+            ]
+        , div [class "row"]
+            [ div [class "input-field col s3"]
+                [ textarea [class "materialize-textarea", placeholder "", onInput Change] []
+                ]
+            , div [class "col s9"]
+                [ toHtml [class "flow-text"] model.content
+                ]
+            ]
+        , div [class "row"]
+            [footer []
+                [ text "Project from "
+                , a [href "https://www.freecodecamp.com/challenges/build-a-markdown-previewer"] [text "FreeCodeCamp"]
+                ]
+            ]
         ]
 
 
